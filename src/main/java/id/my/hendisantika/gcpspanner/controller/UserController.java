@@ -39,4 +39,10 @@ public class UserController {
     public List<User> getAllUsersByName(@PathVariable String name) {
         return userRepository.findByName(name);
     }
+
+    // get all users by country rest API
+    @GetMapping("/users/country/{name}")
+    public List<User> getAllUsersByCountry(@PathVariable String name) {
+        return userRepository.findByCountry(name);
+    }
 }

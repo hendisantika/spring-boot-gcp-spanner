@@ -2,8 +2,10 @@ package id.my.hendisantika.gcpspanner.controller;
 
 import com.google.common.collect.Lists;
 import id.my.hendisantika.gcpspanner.entity.User;
+import id.my.hendisantika.gcpspanner.exception.ResourceNotFoundException;
 import id.my.hendisantika.gcpspanner.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,5 +57,14 @@ public class UserController {
         //Random UUID
         user.setId(UUID.randomUUID().toString());
         return userRepository.save(user);
+    }
+
+    // get user by id rest api
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable String id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException
+                        ("User not exist with id :" + id));
+        return ResponseEntity.ok(user);
     }
 }

@@ -5,6 +5,7 @@ import id.my.hendisantika.gcpspanner.entity.User;
 import id.my.hendisantika.gcpspanner.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,5 +32,11 @@ public class UserController {
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return Lists.newArrayList(userRepository.findAll());
+    }
+
+    // get all users by name rest API
+    @GetMapping("/users/name/{name}")
+    public List<User> getAllUsersByName(@PathVariable String name) {
+        return userRepository.findByName(name);
     }
 }

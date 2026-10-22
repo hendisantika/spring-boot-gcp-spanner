@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### macOS ###
+.DS_Store
+
+### GCP service account keys (never commit credentials) ###
+src/main/resources/*.json
